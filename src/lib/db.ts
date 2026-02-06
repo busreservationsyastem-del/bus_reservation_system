@@ -1,13 +1,18 @@
 import { createClient } from "@libsql/client";
-import path from "path";
 
-// SQLite database stored locally
+// Use in-memory SQLite for serverless compatibility (Vercel)
+// Data persists within the same serverless instance but resets on cold starts
+const isVercel = process.env.VERCEL === "1";
+
 const db = createClient({
-  url: `file:${path.join(process.cwd(), "bus_reservation.db")}`,
+  url: isVercel ? "file::memory:" : "file:bus_reservation.db",
 });
+
+let initialized = false;
 
 // Initialize the bookings table
 export async function initDB() {
+  if (initialized) return;
   await db.execute(`
     CREATE TABLE IF NOT EXISTS bookings (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,6 +34,7 @@ export async function initDB() {
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     )
   `);
+  initialized = true;
 }
 
 export default db;
