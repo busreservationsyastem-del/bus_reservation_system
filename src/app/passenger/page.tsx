@@ -333,18 +333,72 @@ function PassengerForm() {
           <form onSubmit={handleSubmit} className="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-6 sm:p-8">
             <h2 className="mb-6 text-lg font-semibold">Enter Information</h2>
             <div className="space-y-6">
-              {passengersData.map((p, i) => (
-                <div key={i} className="space-y-4 p-4 rounded-xl bg-white/5 border border-white/5">
-                  <h3 className="text-sm font-bold text-blue-300 flex items-center gap-2"><User className="h-4 w-4" /> Passenger {i + 1}</h3>
-                  <input type="text" value={p.name} onChange={(e) => { const nd = [...passengersData]; nd[i].name = e.target.value; setPassengersData(nd); }} placeholder="Full Name" className="w-full rounded-lg bg-white/10 border border-white/20 px-4 py-3 text-white" required />
-                  <div className="grid grid-cols-2 gap-4">
-                    <select value={p.gender} onChange={(e) => { const nd = [...passengersData]; nd[i].gender = e.target.value; setPassengersData(nd); }} className="w-full rounded-lg bg-white/10 border border-white/20 px-4 py-3 text-white" required><option value="">Gender</option><option value="Male">Male</option><option value="Female">Female</option></select>
-                    <input type="number" value={p.age} onChange={(e) => { const nd = [...passengersData]; nd[i].age = e.target.value; setPassengersData(nd); }} placeholder="Age" min={1} className="w-full rounded-lg bg-white/10 border border-white/20 px-4 py-3 text-white" required />
+              {passengersData.map((p, i) => {
+                const isAdult = i < Number(adults);
+                return (
+                  <div key={i} className={`space-y-4 p-6 rounded-2xl border transition-all ${
+                    isAdult 
+                      ? "bg-white/5 border-white/10 shadow-lg" 
+                      : "bg-blue-500/5 border-blue-500/20 shadow-inner"
+                  }`}>
+                    <div className="flex items-center justify-between">
+                      <h3 className={`text-xs font-black uppercase tracking-widest flex items-center gap-2 ${
+                        isAdult ? "text-blue-300" : "text-purple-300"
+                      }`}>
+                        <User className="h-4 w-4" />
+                        {isAdult ? `Adult Passenger ${i + 1}` : `Child Passenger ${i - Number(adults) + 1}`}
+                      </h3>
+                      {!isAdult && (
+                        <span className="text-[10px] font-bold bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full border border-blue-500/30">
+                          Half Ticket
+                        </span>
+                      )}
+                    </div>
+                    
+                    <input 
+                      type="text" 
+                      value={p.name} 
+                      onChange={(e) => { const nd = [...passengersData]; nd[i].name = e.target.value; setPassengersData(nd); }} 
+                      placeholder="Full Name" 
+                      className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3.5 text-white placeholder:text-white/20 focus:bg-white/20 focus:border-white/40 outline-none transition-all" 
+                      required 
+                    />
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="relative">
+                        <select 
+                          value={p.gender} 
+                          onChange={(e) => { const nd = [...passengersData]; nd[i].gender = e.target.value; setPassengersData(nd); }} 
+                          className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3.5 text-white appearance-none focus:bg-white/20 focus:border-white/40 outline-none transition-all" 
+                          required
+                        >
+                          <option value="" className="bg-[#1a1a6e] text-white">Gender</option>
+                          <option value="Male" className="bg-white text-[#1a1a6e]">Male</option>
+                          <option value="Female" className="bg-white text-[#1a1a6e]">Female</option>
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/40">
+                          <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                        </div>
+                      </div>
+                      <input 
+                        type="number" 
+                        value={p.age} 
+                        onChange={(e) => { const nd = [...passengersData]; nd[i].age = e.target.value; setPassengersData(nd); }} 
+                        placeholder="Age" 
+                        min={1} 
+                        className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3.5 text-white placeholder:text-white/20 focus:bg-white/20 focus:border-white/40 outline-none transition-all" 
+                        required 
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="w-full rounded-lg bg-white/10 border border-white/20 px-4 py-3 text-white" required />
-              <input type="tel" value={mobile} onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))} placeholder="Mobile" maxLength={10} className="w-full rounded-lg bg-white/10 border border-white/20 px-4 py-3 text-white" required />
+                );
+              })}
+              
+              <div className="space-y-4 pt-4 border-t border-white/10">
+                <h3 className="text-xs font-black uppercase tracking-widest text-white/40">Contact Information</h3>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3.5 text-white placeholder:text-white/20 focus:bg-white/20 focus:border-white/40 outline-none transition-all" required />
+                <input type="tel" value={mobile} onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))} placeholder="Mobile Number" maxLength={10} className="w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3.5 text-white placeholder:text-white/20 focus:bg-white/20 focus:border-white/40 outline-none transition-all" required />
+              </div>
             </div>
             {error && <p className="mt-4 text-red-200 text-sm bg-red-500/20 p-2 rounded-lg">{error}</p>}
             <button type="submit" disabled={loading} className="mt-6 w-full rounded-xl bg-green-600 py-3.5 font-semibold shadow-lg">{loading ? "Confirming..." : "Confirm Ticket"}</button>
