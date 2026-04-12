@@ -238,27 +238,11 @@ export default function AdminDashboard() {
     // Set up real-time listener for Customers
     const customersQuery = query(collection(db, "customers"), orderBy("createdAt", "desc"));
     const unsubscribeCustomers = onSnapshot(customersQuery, (snapshot) => {
-      const fsData = snapshot.docs.map(doc => ({
+      const data = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       })) as Customer[];
-      
-      // Combine with local storage customers for demo purposes
-      const localData = JSON.parse(localStorage.getItem("local_customers") || "[]");
-      const combined = [...fsData];
-      
-      // Add local customers that aren't already in Firestore data (by email)
-      localData.forEach((lc: any) => {
-        if (!combined.some(c => c.email === lc.email)) {
-          combined.push(lc);
-        }
-      });
-
-      setCustomers(combined);
-    }, (error) => {
-      console.warn("Firestore customer sync error (using local only):", error);
-      const localData = JSON.parse(localStorage.getItem("local_customers") || "[]");
-      setCustomers(localData);
+      setCustomers(data);
     });
 
     return () => {

@@ -30,30 +30,16 @@ export default function SignupPage() {
         name,
         email,
         mobile,
-        createdAt: new Date().toISOString(),
         id: customerId
       };
 
-      // Try Firestore, but don't hang if config is missing
-      try {
-        if (process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-          await setDoc(doc(collection(db, "customers"), customerId), {
-            ...customerData,
-            createdAt: serverTimestamp()
-          });
-        } else {
-          console.warn("Firebase API Key missing, skipping Firestore write.");
-        }
-      } catch (fsErr) {
-        console.error("Firestore error (falling back to local):", fsErr);
-      }
+      // Store in Firestore - Required for deployment so data is shared across all users
+      await setDoc(doc(collection(db, "customers"), customerId), {
+        ...customerData,
+        createdAt: serverTimestamp()
+      });
 
-      // ALWAYS store in localStorage as a reliable fallback for this demo
-      // We'll also maintain a 'local_customers' list for the admin dashboard to see
-      const localCustomers = JSON.parse(localStorage.getItem("local_customers") || "[]");
-      localCustomers.push(customerData);
-      localStorage.setItem("local_customers", JSON.stringify(localCustomers));
-      
+      // Set local session
       localStorage.setItem("customer_user", JSON.stringify(customerData));
       
       router.push("/");

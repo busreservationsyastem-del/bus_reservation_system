@@ -23,34 +23,15 @@ export default function LoginPage() {
     setError("");
 
     try {
-      let userData = null;
+      const customersRef = collection(db, "customers");
+      const q = query(customersRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
 
-      // Try local storage first
-      const localCustomers = JSON.parse(localStorage.getItem("local_customers") || "[]");
-      const localUser = localCustomers.find((c: any) => c.email === email);
-      
-      if (localUser) {
-        userData = localUser;
-      } else {
-        // Try Firestore only if API key exists
-        if (process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-          try {
-            const customersRef = collection(db, "customers");
-            const q = query(customersRef, where("email", "==", email));
-            const querySnapshot = await getDocs(q);
-
-            if (!querySnapshot.empty) {
-              userData = querySnapshot.docs[0].data();
-            }
-          } catch (fsErr) {
-            console.error("Firestore login error:", fsErr);
-          }
-        }
-      }
-
-      if (!userData) {
+      if (querySnapshot.empty) {
         throw new Error("Invalid email or password");
       }
+
+      const userData = querySnapshot.docs[0].data();
       
       // Store in localStorage for session simulation
       localStorage.setItem("customer_user", JSON.stringify(userData));
