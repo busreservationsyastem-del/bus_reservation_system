@@ -237,31 +237,69 @@ function PassengerForm() {
           </div>
         </main>
 
-        <div id="booking-card" style={{ position: 'fixed', left: '-9999px', backgroundColor: '#1a1a6e', color: '#ffffff', padding: '48px', borderRadius: '40px', width: '600px', border: '4px solid rgba(255, 255, 255, 0.2)', fontFamily: 'sans-serif' }}>
+        <div id="booking-card" style={{ position: 'fixed', left: '-9999px', backgroundColor: '#1a1a6e', color: '#ffffff', padding: '48px', borderRadius: '40px', width: '600px', border: '4px solid rgba(255, 255, 255, 0.2)', fontFamily: 'sans-serif', overflow: 'hidden' }}>
+          {/* Top Header Section */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '48px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', padding: '12px', borderRadius: '16px' }}><Bus style={{ height: '32px', width: '32px', color: '#fde047' }} /></div>
-              <div style={{ textAlign: 'left' }}><h3 style={{ fontSize: '24px', fontWeight: 900, margin: 0 }}>Bus Reservation</h3><p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: 0 }}>Ticket Confirmation</p></div>
+              <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', padding: '12px', borderRadius: '16px' }}>
+                <Bus style={{ height: '32px', width: '32px', color: '#fde047' }} />
+              </div>
+              <div style={{ textAlign: 'left' }}>
+                <h3 style={{ fontSize: '24px', fontWeight: 900, margin: 0, textTransform: 'uppercase' }}>Bus Reservation</h3>
+                <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: 0, textTransform: 'uppercase', letterSpacing: '1px' }}>Ticket Confirmation</p>
+              </div>
             </div>
-            <div style={{ textAlign: 'right' }}><p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: 0 }}>Status</p><p style={{ fontSize: '18px', fontWeight: 900, color: '#4ade80', margin: 0 }}>Confirmed</p></div>
+            <div style={{ textAlign: 'right' }}>
+              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: 0, textTransform: 'uppercase' }}>Status</p>
+              <p style={{ fontSize: '18px', fontWeight: 900, color: '#4ade80', margin: 0, textTransform: 'uppercase' }}>Confirmed</p>
+            </div>
           </div>
-          <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', borderRadius: '24px', padding: '32px', marginBottom: '32px', textAlign: 'center' }}>
-            <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', marginBottom: '8px' }}>Booking PNR</p>
-            <p style={{ fontSize: '48px', fontWeight: 900, color: '#fde047', margin: 0 }}>{pnr}</p>
+
+          {/* PNR Section */}
+          <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', borderRadius: '24px', padding: '32px', marginBottom: '48px', textAlign: 'center', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+            <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '2px' }}>Booking PNR</p>
+            <p style={{ fontSize: '48px', fontWeight: 900, color: '#fde047', margin: 0, letterSpacing: '2px' }}>{pnr}</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+
+          {/* Details Grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px 48px' }}>
             <div>
-              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0' }}>Bus Service</p>
+              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Passenger Name</p>
+              <p style={{ fontSize: '18px', fontWeight: 'bold', margin: 0, textTransform: 'capitalize' }}>{passengersData[0]?.name}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Travel Date</p>
+              <p style={{ fontSize: '18px', fontWeight: 'bold', margin: 0 }}>{journeyDate}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Bus Service</p>
               <p style={{ fontSize: '18px', fontWeight: 'bold', margin: 0 }}>{busName}</p>
-              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '16px 0 4px 0' }}>Route</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Mobile Number</p>
+              <p style={{ fontSize: '18px', fontWeight: 'bold', margin: 0 }}>{mobile}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Route</p>
               <p style={{ fontSize: '14px', fontWeight: 'bold', margin: 0 }}>{fromLocation} → {toLocation}</p>
             </div>
             <div>
-              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0' }}>Travel Date</p>
-              <p style={{ fontSize: '18px', fontWeight: 'bold', margin: 0 }}>{journeyDate}</p>
-              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '16px 0 4px 0' }}>Mobile</p>
-              <p style={{ fontSize: '18px', fontWeight: 'bold', margin: 0 }}>{mobile}</p>
+              <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Seat Numbers</p>
+              <p style={{ fontSize: '14px', fontWeight: 'bold', margin: 0 }}>{seatNumbers}</p>
             </div>
+          </div>
+
+          {/* Total Price Section */}
+          <div style={{ marginTop: '32px', textAlign: 'center' }}>
+            <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: '0 0 4px 0', textTransform: 'uppercase' }}>Total Price</p>
+            <p style={{ fontSize: '24px', fontWeight: 900, color: '#fde047', margin: 0 }}>₹{totalFare}</p>
+          </div>
+
+          {/* Footer Note */}
+          <div style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', textAlign: 'center' }}>
+            <p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.3)', margin: 0 }}>
+              This is an electronically generated booking confirmation. No signature required.
+            </p>
           </div>
         </div>
       </div>
