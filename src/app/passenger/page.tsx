@@ -108,6 +108,15 @@ function PassengerForm() {
       setError("All fields are required.");
       return;
     }
+
+    // Validate child ages (first 'adults' are adults, remaining are children)
+    const childPassengers = passengersData.slice(Number(adults));
+    const invalidChild = childPassengers.find(p => Number(p.age) >= 12);
+    if (invalidChild) {
+      setError(`Passenger "${invalidChild.name}" is ${invalidChild.age} years old. Children must be under 12 for half-ticket.`);
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch("/api/bookings", {
@@ -278,6 +287,10 @@ function PassengerForm() {
           <div className="mb-6 rounded-xl bg-white/5 border border-white/10 p-4">
             <div className="flex justify-between items-center"><span className="font-semibold">{busName}</span><span className="text-green-300 font-bold">₹{totalFare}</span></div>
             <p className="mt-1 text-sm text-white/60">{fromLocation} → {toLocation} | {journeyDate}</p>
+            <div className="mt-3 p-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-[10px] text-blue-300 font-bold uppercase tracking-wider flex items-center gap-2">
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-blue-500 text-white text-[8px]">!</span>
+              Note: Children under 12 years are eligible for half-ticket.
+            </div>
           </div>
           <form onSubmit={handleSubmit} className="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-6 sm:p-8">
             <h2 className="mb-6 text-lg font-semibold">Enter Information</h2>
