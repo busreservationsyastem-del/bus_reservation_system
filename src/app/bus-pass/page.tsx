@@ -16,19 +16,19 @@ export default function BusPassPage() {
 
   const services = [
     {
-      title: "New Commuter Bus Pass",
+      title: "New Customer Bus Pass",
       icon: FileText,
       href: "/bus-pass/new",
       color: "text-blue-400",
     },
     {
-      title: "Renewal Commuter Bus Pass",
+      title: "Renewal Customer Bus Pass",
       icon: RefreshCw,
       href: "/bus-pass/renewal",
       color: "text-blue-400",
     },
     {
-      title: "Application Status",
+      title: "Track Bus Pass",
       icon: Search,
       href: "/bus-pass/status",
       color: "text-blue-400",

@@ -62,13 +62,13 @@ export default function PassStatusPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#1a1a6e] via-[#2d2d8e] to-[#6b21a8] text-white flex flex-col font-sans">
       <header className="p-4 flex items-center gap-4 bg-white/5 backdrop-blur-sm border-b border-white/10">
         <Link href="/bus-pass" className="rounded-lg p-2 hover:bg-white/10 transition-colors"><ArrowLeft className="h-6 w-6" /></Link>
-        <h1 className="text-xl font-bold uppercase tracking-tight">Application Status</h1>
+        <h1 className="text-xl font-bold uppercase tracking-tight">Track Bus Pass</h1>
       </header>
       <main className="p-6 max-w-lg mx-auto w-full">
         <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl space-y-8">
           <div className="text-center space-y-2">
             <Search className="h-12 w-12 text-blue-400 mx-auto mb-2" />
-            <h2 className="text-2xl font-black uppercase tracking-tight">Check Pass Status</h2>
+            <h2 className="text-2xl font-black uppercase tracking-tight">Track Bus Pass</h2>
           </div>
           <form onSubmit={handleSearch} className="space-y-6">
             <div className="space-y-2">
@@ -114,7 +114,7 @@ export default function PassStatusPage() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '48px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', padding: '12px', borderRadius: '16px' }}><Bus style={{ height: '32px', width: '32px', color: '#fde047' }} /></div>
-            <div style={{ textAlign: 'left' }}><h3 style={{ fontSize: '24px', fontWeight: 900, margin: 0 }}>City Commuter</h3><p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: 0 }}>Bus Pass System</p></div>
+            <div style={{ textAlign: 'left' }}><h3 style={{ fontSize: '24px', fontWeight: 900, margin: 0 }}>City Customer</h3><p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: 0 }}>Bus Pass System</p></div>
           </div>
           <div style={{ textAlign: 'right' }}><p style={{ fontSize: '10px', color: 'rgba(255, 255, 255, 0.4)', margin: 0 }}>Pass Status</p><p style={{ fontSize: '18px', fontWeight: 900, color: '#4ade80', margin: 0 }}>Active</p></div>
         </div>

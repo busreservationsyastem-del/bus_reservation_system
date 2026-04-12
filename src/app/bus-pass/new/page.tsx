@@ -83,7 +83,7 @@ export default function NewBusPassPage() {
           mobile,
           duration: duration,
           price: selectedDuration?.price || 0,
-          passType: "Commuter"
+          passType: "Customer"
         }),
       });
 
@@ -154,7 +154,7 @@ export default function NewBusPassPage() {
           <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl w-full text-center">
             <CheckCircle className="h-20 w-20 text-green-400 mx-auto mb-6" />
             <h2 className="text-3xl font-black mb-2 uppercase tracking-tighter text-white">Confirmed!</h2>
-            <p className="text-white/60 mb-8 font-medium">Your commuter bus pass has been generated successfully.</p>
+            <p className="text-white/60 mb-8 font-medium">Your customer bus pass has been generated successfully.</p>
 
             {/* Hidden PDF Template */}
             <div id="bus-pass-card" style={{
@@ -207,7 +207,7 @@ export default function NewBusPassPage() {
                       <Bus style={{ height: '32px', width: '32px', color: '#fde047' }} />
                     </div>
                     <div>
-                      <h3 style={{ fontSize: '24px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.05em', margin: 0 }}>City Commuter</h3>
+                      <h3 style={{ fontSize: '24px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-0.05em', margin: 0 }}>City Customer</h3>
                       <p style={{ fontSize: '10px', fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.4)', textTransform: 'uppercase', letterSpacing: '0.3em', margin: 0 }}>Bus Pass System</p>
                     </div>
                   </div>
@@ -374,7 +374,7 @@ export default function NewBusPassPage() {
                 >
                   <div className="flex flex-col items-start">
                     <span className="text-xl font-black uppercase tracking-tight">{d.label}</span>
-                    <span className="text-xs font-bold text-white/40 uppercase tracking-widest mt-1">Commuter Pass</span>
+                    <span className="text-xs font-bold text-white/40 uppercase tracking-widest mt-1">Customer Pass</span>
                   </div>
                   <span className="text-2xl font-black text-blue-300">₹{d.price}</span>
                 </button>
