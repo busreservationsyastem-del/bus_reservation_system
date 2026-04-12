@@ -38,7 +38,7 @@ yarn-error.log*
 *.db-journal
 
 # local env files
-.env*.local
+# .env*.local
 
 # typescript
 *.tsbuildinfo
